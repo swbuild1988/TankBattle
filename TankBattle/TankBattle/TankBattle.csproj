@@ -55,6 +55,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tank.cs" />
     <Compile Include="bullet.cs" />
+    <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -80,12 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Player.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="material\p1tankU.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="material\enemymissile.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
