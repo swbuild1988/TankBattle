@@ -25,7 +25,7 @@ namespace TankBattle
         /// <summary>
         /// 帧数
         /// </summary>
-        int fps = 60;
+        int fps = 10;
 
         Tank tank = new Tank();
 
@@ -52,8 +52,16 @@ namespace TankBattle
 
         private void Main_KeyUp(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("keyup");
-            tank.Stop();
+            string k = e.KeyCode.ToString().ToLower();
+            switch (k)
+            {
+                case "space":
+                case "numpad0":
+                    break;
+                default:
+                    tank.Stop();
+                    break;
+            }
         }
 
         private void Main_KeyDown(object sender, KeyEventArgs e)
@@ -79,6 +87,11 @@ namespace TankBattle
                 case "s":
                 case "down":
                     tank.MoveDown();
+                    break;
+
+                case "space":
+                case "numpad0":
+                    tank.Fire();
                     break;
             }
 

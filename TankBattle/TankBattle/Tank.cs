@@ -19,8 +19,18 @@ namespace TankBattle
         private Image _ori_image;
         private Image _image;
 
-        private int _direct_x = 0;
-        private int _direct_y = 0;
+        private Bullet bullet = new Bullet();
+
+        enum Direct
+        {
+            UP = 0,
+            RIGHT = 1,
+            DOWN = 2,
+            LEFT = 3
+        }
+
+        private Direct _dir = Direct.UP;
+        private bool _isMove = false;
 
         public Tank()
         {
@@ -39,39 +49,44 @@ namespace TankBattle
         #region 坦克的移动方法
         public void MoveLeft()
         {
-            if (_direct_x != -1) rotate(RotateFlipType.Rotate270FlipNone);
-            setDirect(-1, 0);
+            Move(Direct.LEFT);
         }
 
         public void MoveRight()
         {
-            if (_direct_x != 1) rotate(RotateFlipType.Rotate90FlipNone);
-            setDirect(1, 0);
+            Move(Direct.RIGHT);
         }
 
         public void MoveUp()
         {
-            if (_direct_y != -1) rotate(RotateFlipType.RotateNoneFlipNone);
-            setDirect(0, -1);
+            Move(Direct.UP);
         }
 
         public void MoveDown()
         {
-            if (_direct_y != 1) rotate(RotateFlipType.Rotate180FlipNone);
-            setDirect(0, 1);
+            Move(Direct.DOWN);
+        }
+
+        private void Move(Direct dir)
+        {
+            if (_dir != dir)
+            {
+                rotate((RotateFlipType)dir);
+                _dir = dir;
+            }
+            _isMove = true;
         }
 
         public void Stop()
         {
-            setDirect(0, 0);
+            _isMove = false;
         }
 
-        private void setDirect(int dir_x, int dir_y)
+        public void Fire()
         {
-            _direct_x = dir_x;
-            _direct_y = dir_y;
+            if (!bullet.IsExist) bullet.Shoot((int)_dir, _position);
         }
-
+        
         private void rotate(RotateFlipType type)
         {
             _image = _ori_image.Clone() as Image;
@@ -83,17 +98,25 @@ namespace TankBattle
         public void Draw(Graphics g)
         {
             g.DrawImage(_image, _position);
+            if (bullet.IsExist) bullet.Draw(g);
         }
 
         public void Update()
         {
             //Console.WriteLine("tank update, dirX : {0}, dirY : {1}", _direct_x, _direct_y);
+            int _direct_x = (int)_dir % 2 == 1 && _isMove ? -1 * (int)_dir + 2 : 0;
+            int _direct_y = (int)_dir % 2 == 0 && _isMove ? (int)_dir - 1 : 0;
             _position.X += _speed * _direct_x;
             _position.Y += _speed * _direct_y;
             if (_position.X < 0) _position.X = 0;
             if (_position.X + _size.Width > 380) _position.X = 380 - _size.Width;
             if (_position.Y < 0) _position.Y = 0;
             if (_position.Y + _size.Height > 457) _position.Y = 457 - _size.Height;            
+
+            if (bullet.IsExist)
+            {
+                bullet.Update();
+            }
         }
 
     }
