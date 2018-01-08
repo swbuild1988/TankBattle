@@ -16,6 +16,7 @@ namespace TankBattle
         private Point _position = new Point(100, 100);
         private Size _size = new Size(30, 30);
         private int _speed = 5;
+        private Image _ori_image;
         private Image _image;
 
         private int _direct_x = 0;
@@ -23,7 +24,8 @@ namespace TankBattle
 
         public Tank()
         {
-            _image = Utility.resizeImage(Resources.player, _size);
+            _ori_image = Utility.resizeImage(Resources.player, _size);
+            _image = _ori_image.Clone() as Image;
         }
 
         public Point Position
@@ -37,32 +39,43 @@ namespace TankBattle
         #region 坦克的移动方法
         public void MoveLeft()
         {
-            _direct_x = -1;
-            _direct_y = 0;
+            if (_direct_x != -1) rotate(RotateFlipType.Rotate270FlipNone);
+            setDirect(-1, 0);
         }
 
         public void MoveRight()
         {
-            _direct_x = 1;
-            _direct_y = 0;
+            if (_direct_x != 1) rotate(RotateFlipType.Rotate90FlipNone);
+            setDirect(1, 0);
         }
 
         public void MoveUp()
         {
-            _direct_y = -1;
-            _direct_x = 0;
+            if (_direct_y != -1) rotate(RotateFlipType.RotateNoneFlipNone);
+            setDirect(0, -1);
         }
 
         public void MoveDown()
         {
-            _direct_y = 1;
-            _direct_x = 0;
+            if (_direct_y != 1) rotate(RotateFlipType.Rotate180FlipNone);
+            setDirect(0, 1);
         }
 
         public void Stop()
         {
-            _direct_x = 0;
-            _direct_y = 0;
+            setDirect(0, 0);
+        }
+
+        private void setDirect(int dir_x, int dir_y)
+        {
+            _direct_x = dir_x;
+            _direct_y = dir_y;
+        }
+
+        private void rotate(RotateFlipType type)
+        {
+            _image = _ori_image.Clone() as Image;
+            _image.RotateFlip(type);
         }
 
         #endregion
