@@ -25,7 +25,7 @@ namespace TankBattle
         /// <summary>
         /// 帧数
         /// </summary>
-        int fps = 10;
+        int fps = 60;
 
         Tank tank = new Tank();
 
