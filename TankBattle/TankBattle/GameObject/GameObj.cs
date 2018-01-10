@@ -30,7 +30,7 @@ namespace TankBattle
 
         #endregion
 
-        public GameObj(Image img, Size size, Point position, int speed = 5, bool isExist = true)
+        public GameObj(Image img, Size size, Point position, int speed = 0, bool isExist = true)
         {
             _position = position;
             _size = size;

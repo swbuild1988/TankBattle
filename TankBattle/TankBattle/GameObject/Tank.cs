@@ -23,7 +23,7 @@ namespace TankBattle
         
         public void Fire()
         {
-            Console.WriteLine("开火，子弹状态{0}", bullet.IsExist);
+            Utility.Log(string.Format("开火，子弹状态{0}", bullet.IsExist));
             if (!bullet.IsExist)
             {
                 Point tmp = new Point();

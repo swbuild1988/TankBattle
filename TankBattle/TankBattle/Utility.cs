@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 
 namespace TankBattle
@@ -36,6 +37,11 @@ namespace TankBattle
             g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
             g.Dispose();
             return (Image)b;
+        }
+
+        public static void Log(string msg)
+        {
+            Console.WriteLine(msg);
         }
     }
 }

@@ -95,7 +95,7 @@ namespace TankBattle
                     break;
             }
 
-            Console.WriteLine("按下的键{0},位置为{1}.{2}", k, tank.Position.X, tank.Position.Y);
+            Utility.Log(string.Format("按下的键{0},位置为{1}.{2}", k, tank.Position.X, tank.Position.Y));
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
