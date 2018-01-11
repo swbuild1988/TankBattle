@@ -42,14 +42,5 @@ namespace TankBattle
             if (bullet.IsExist) bullet.Draw(g);
         }
 
-        public override void Update()
-        {
-            base.Update();
-            if (bullet.IsExist)
-            {
-                bullet.Update();
-            }
-        }
-
     }
 }

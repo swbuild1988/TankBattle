@@ -65,7 +65,8 @@ namespace TankBattle
 
         private void _window_KeyUp(object sender, KeyEventArgs e)
         {
-            setHashTableValue(_keyDowns, e.KeyCode.ToString().ToLower(), false);
+            string key = e.KeyCode.ToString().ToLower();
+            setHashTableValue(_keyDowns, key, false);
         }
 
         private void _window_KeyDown(object sender, KeyEventArgs e)
@@ -93,10 +94,13 @@ namespace TankBattle
         {
             foreach (DictionaryEntry item in _actions)
             {
-                //if ((bool)_keyDowns[item.Key]) _actions[item.Key] as Action;
+                if (_keyDowns.ContainsKey(item.Key) && (bool)_keyDowns[item.Key])
+                {
+                    Action ac = _actions[item.Key] as Action;
+                    ac.Invoke();
+                }
             }
-
-            Tank.Update();
+            
             _canvas.Invalidate();
             _refreshTimer.Start();
         }

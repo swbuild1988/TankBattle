@@ -25,7 +25,6 @@ namespace TankBattle
         }
 
         private Direct _dir = Direct.UP;
-        private bool _isMove = false;
         private bool _isExist = true;
 
         #endregion
@@ -121,12 +120,7 @@ namespace TankBattle
         {
             Move(Direct.DOWN);
         }
-
-        public void Stop()
-        {
-            _isMove = false;
-        }
-
+        
         public int GetDirectX()
         {
             return (int)_dir % 2 == 1 ? -1 * (int)_dir + 2 : 0;
@@ -144,7 +138,15 @@ namespace TankBattle
                 rotate((RotateFlipType)dir);
                 _dir = dir;
             }
-            _isMove = true;
+
+            int _direct_x = GetDirectX();
+            int _direct_y = GetDirectY();
+            _position.X += _speed * _direct_x;
+            _position.Y += _speed * _direct_y;
+            if (_position.X < 0) _position.X = 0;
+            if (_position.X + _size.Width > _range.X) _position.X = _range.X - _size.Width;
+            if (_position.Y < 0) _position.Y = 0;
+            if (_position.Y + _size.Height > _range.Y) _position.Y = _range.Y - _size.Height;
         }
 
         #endregion
@@ -164,18 +166,6 @@ namespace TankBattle
         public virtual void Draw(Graphics g)
         {
             g.DrawImage(_image, _position);
-        }
-
-        public virtual void Update()
-        {
-            int _direct_x = _isMove ? GetDirectX() : 0;
-            int _direct_y = _isMove ? GetDirectY() : 0;
-            _position.X += _speed * _direct_x;
-            _position.Y += _speed * _direct_y;
-            if (_position.X < 0) _position.X = 0;
-            if (_position.X + _size.Width > _range.X) _position.X = _range.X - _size.Width;
-            if (_position.Y < 0) _position.Y = 0;
-            if (_position.Y + _size.Height > _range.Y) _position.Y = _range.Y - _size.Height;
         }
 
         #endregion

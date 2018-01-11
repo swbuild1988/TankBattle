@@ -24,26 +24,27 @@ namespace TankBattle
         {
             this.Position = position;
             this.IsExist = true;
+            this.Dir = dir;
             Move(dir);
         }
 
         public void Hit()
         {
             IsExist = false;
-            Stop();
         }
 
         public override void Draw(Graphics g)
         {
-            base.Draw(g);
-        }
+            if (!IsExist) return;
 
-        public override void Update()
-        {
-            base.Update();
-            if (OutRange()) Hit();
-        }
+            Move(Dir);
 
+            if (OutRange())
+                Hit();
+            else
+                base.Draw(g);
+        }
+        
         public bool OutRange()
         {
             return Position.X <= 0 || Position.X + Size.Width >= Range.X ||

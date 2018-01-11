@@ -41,7 +41,7 @@ namespace TankBattle
 
         public static void Log(string msg)
         {
-            Console.WriteLine(msg);
+            //Console.WriteLine(msg);
         }
     }
 }
