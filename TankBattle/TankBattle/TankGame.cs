@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace TankBattle
 {
-    class TankGame
+    class TankGame : IDisposable
     {
         private int _fps = 60;
         private System.Timers.Timer _refreshTimer = new System.Timers.Timer();
@@ -107,5 +107,24 @@ namespace TankBattle
             _refreshTimer.Interval = 1000.0 / _fps;
             _refreshTimer.Start();
         }
+
+        #region Dispose
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _refreshTimer.Dispose();
+            }
+        }
+
+        #endregion
+
     }
 }
