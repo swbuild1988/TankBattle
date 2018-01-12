@@ -41,6 +41,11 @@ namespace TankBattle
             base.Draw(g);
             if (bullet.IsExist) bullet.Draw(g);
         }
-
+        
+        public new void Pause()
+        {
+            base.Pause();
+            bullet.Pause();
+        }
     }
 }

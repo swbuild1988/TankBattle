@@ -33,7 +33,7 @@ namespace TankBattle
             init();
         }
 
-        public void SetFPS(int fps)
+        public void setFPS(int fps)
         {
             this._fps = fps;
         }
@@ -42,6 +42,7 @@ namespace TankBattle
         {
             setHashTableValue(_actions, key, action);
         }
+
 
         private void init()
         {
@@ -100,8 +101,10 @@ namespace TankBattle
                     ac.Invoke();
                 }
             }
-            
+
             _canvas.Invalidate();
+            
+            _refreshTimer.Interval = 1000.0 / _fps;
             _refreshTimer.Start();
         }
     }

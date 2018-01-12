@@ -26,6 +26,7 @@ namespace TankBattle
 
         private Direct _dir = Direct.UP;
         private bool _isExist = true;
+        private bool _isPause = false;
 
         #endregion
 
@@ -120,7 +121,12 @@ namespace TankBattle
         {
             Move(Direct.DOWN);
         }
-        
+
+        public void Pause()
+        {
+            _isPause = !_isPause;
+        }
+
         public int GetDirectX()
         {
             return (int)_dir % 2 == 1 ? -1 * (int)_dir + 2 : 0;
@@ -133,6 +139,8 @@ namespace TankBattle
 
         public  void Move(Direct dir)
         {
+            if (_isPause) return;
+
             if (_dir != dir)
             {
                 rotate((RotateFlipType)dir);

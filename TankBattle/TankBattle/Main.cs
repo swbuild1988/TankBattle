@@ -42,6 +42,10 @@ namespace TankBattle
             game.registerActions("down", () => game.Tank.MoveDown());
             game.registerActions("space", () => game.Tank.Fire());
             game.registerActions("numpad0", () => game.Tank.Fire());
+            this.KeyDown += (object sender, KeyEventArgs e) =>
+            {
+                if (e.KeyCode == Keys.P) game.Tank.Pause();
+            };
         }
     }
 }
