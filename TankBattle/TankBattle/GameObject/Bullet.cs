@@ -13,10 +13,9 @@ namespace TankBattle
     /// </summary>
     class Bullet : GameObj
     {
-        public Bullet()
-            : base(Resources.bullet, new Size(4, 4), new Point(100, 100), 15, false)
+        public Bullet(TankGame game)
+            : base(game, Resources.bullet, new Size(4, 4), new Point(100, 100), 15, false)
         {
-            this.Range = new Point(380, 457);
         }
         
 

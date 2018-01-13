@@ -7,15 +7,6 @@ namespace TankBattle
     /// </summary>
     class GameObj
     {
-        #region 私有参数
-
-        private Point _position;
-        private Point _range;
-        private Size _size;
-        private int _speed;
-        private Image _ori_image;
-        private Image _image;
-
         public enum Direct
         {
             UP = 0,
@@ -24,20 +15,33 @@ namespace TankBattle
             LEFT = 3
         }
 
+        #region 私有参数
+
+        private Point _position;
+        private Point _range;
+        private Size _size;
+        private int _speed;
+        private Image _ori_image;
+        private Image _image;
+        private TankGame _game;
+
         private Direct _dir = Direct.UP;
         private bool _isExist = true;
         private bool _isPause = false;
 
         #endregion
 
-        public GameObj(Image img, Size size, Point position, int speed = 0, bool isExist = true)
+        public GameObj(TankGame game, Image img, Size size, Point position, int speed = 0, bool isExist = true)
         {
+            _game = game;
             _position = position;
             _size = size;
             _speed = speed;
             _isExist = isExist;
             _ori_image = Utility.resizeImage(img, size);
             _image = _ori_image.Clone() as Image;
+            
+            this.Range = game.Range;
         }
 
         #region 公有参数
@@ -95,6 +99,14 @@ namespace TankBattle
             get
             {
                 return _range;
+            }
+        }
+
+        public TankGame Game
+        {
+            get
+            {
+                return _game;
             }
         }
 

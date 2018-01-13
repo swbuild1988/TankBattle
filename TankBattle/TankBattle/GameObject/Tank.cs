@@ -13,12 +13,12 @@ namespace TankBattle
     /// </summary>
     class Tank : GameObj
     {
-        private Bullet bullet = new Bullet();
+        private Bullet bullet;
 
-        public Tank() 
-            : base(Resources.player, new Size(30, 30), new Point(100, 100), 5)
+        public Tank(TankGame game) 
+            : base(game, Resources.player, new Size(30, 30), new Point(100, 100), 5)
         {
-            this.Range = new Point(380, 457);
+            bullet = new Bullet(this.Game);
         }
         
         public void Fire()

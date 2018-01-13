@@ -3,11 +3,14 @@ using System.Timers;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace TankBattle
 {
     class TankGame : IDisposable
     {
+        public Point Range { get; set; }
+
         private int _fps = 60;
         private System.Timers.Timer _refreshTimer = new System.Timers.Timer();
         private Control _canvas;
@@ -17,6 +20,7 @@ namespace TankBattle
 
 
         public Tank Tank { get; set; }
+        public List<Wall> Walls { get; set; }
 
         public TankGame(Control ctrl, Control window)
         {
@@ -25,11 +29,12 @@ namespace TankBattle
             init();
         }
 
-        public TankGame(int fps, Control ctrl, Control window)
+        public TankGame(int fps, Control ctrl, Control window, Point range)
         {
             this._fps = fps;
             this._canvas = ctrl;
             this._window = window;
+            this.Range = range;
             init();
         }
 
@@ -46,7 +51,13 @@ namespace TankBattle
 
         private void init()
         {
-            Tank = new Tank();
+            Walls = new List<Wall>();
+            for (int i = 0; i < 6; i++)
+            {
+                Wall w = new Wall(this, new Point(i * 60, i * 80));
+                Walls.Add(w);
+            }
+            Tank = new Tank(this);
 
             #region 初始化Timer，并设置为单次触发
             _refreshTimer.Interval = 1000.0 / _fps;
@@ -88,6 +99,7 @@ namespace TankBattle
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            foreach (Wall item in Walls) item.Draw(g);
             Tank.Draw(g);
         }
 

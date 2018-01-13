@@ -31,7 +31,8 @@ namespace TankBattle
         /// </summary>
         public void InitialGame()
         {
-            TankGame game = new TankGame(fps, panel1, this);
+            TankGame game = new TankGame(fps, panel1, this, new Point(380, 457));
+
             game.registerActions("a", () => game.Tank.MoveLeft());
             game.registerActions("d", () => game.Tank.MoveRight());
             game.registerActions("w", () => game.Tank.MoveUp());
