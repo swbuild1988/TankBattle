@@ -24,7 +24,6 @@ namespace TankBattle
             this.Position = position;
             this.IsExist = true;
             this.Dir = dir;
-            Move(dir);
         }
 
         public void Hit()
@@ -34,14 +33,10 @@ namespace TankBattle
 
         public override void Draw(Graphics g)
         {
-            if (!IsExist) return;
-
             Move(Dir);
+            if (OutRange()) Hit();
 
-            if (OutRange())
-                Hit();
-            else
-                base.Draw(g);
+            base.Draw(g);
         }
         
         public bool OutRange()

@@ -185,7 +185,7 @@ namespace TankBattle
 
         public virtual void Draw(Graphics g)
         {
-            g.DrawImage(_image, _position);
+            if (_isExist) g.DrawImage(_image, _position);
         }
 
         #endregion

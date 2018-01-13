@@ -9,7 +9,7 @@ using TankBattle.Properties;
 namespace TankBattle
 {
     /// <summary>
-    /// 坦克类
+    /// 墙类
     /// </summary>
     class Wall : GameObj
     {

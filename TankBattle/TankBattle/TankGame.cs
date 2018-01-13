@@ -17,18 +17,12 @@ namespace TankBattle
         private Control _window;
         private Hashtable _keyDowns = new Hashtable();
         private Hashtable _actions = new Hashtable();
+        private List<GameObj> _elements = new List<GameObj>();
 
 
         public Tank Tank { get; set; }
         public List<Wall> Walls { get; set; }
-
-        public TankGame(Control ctrl, Control window)
-        {
-            this._canvas = ctrl;
-            this._window = window;
-            init();
-        }
-
+        
         public TankGame(int fps, Control ctrl, Control window, Point range)
         {
             this._fps = fps;
@@ -58,6 +52,9 @@ namespace TankBattle
                 Walls.Add(w);
             }
             Tank = new Tank(this);
+
+            _elements.AddRange(Walls);
+            _elements.Add(Tank);
 
             #region 初始化Timer，并设置为单次触发
             _refreshTimer.Interval = 1000.0 / _fps;
@@ -98,9 +95,7 @@ namespace TankBattle
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            foreach (Wall item in Walls) item.Draw(g);
-            Tank.Draw(g);
+            foreach (GameObj item in _elements) item.Draw(e.Graphics);
         }
 
         private void _refreshTimer_Elapsed(object sender, ElapsedEventArgs e)
