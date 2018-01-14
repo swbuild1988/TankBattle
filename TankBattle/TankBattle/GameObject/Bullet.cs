@@ -26,27 +26,10 @@ namespace TankBattle
             this.Dir = dir;
         }
 
-        public void Hit(GameObj obj)
-        {
-            IsExist = false;
-            if (obj != null) obj.IsExist = false;
-        }
-
         public override void Draw(Graphics g)
         {
             Move(Dir);
-            if (OutRange())
-            {
-                Hit(null);
-            }
-            else
-            {
-                foreach (GameObj item in this.Game.Walls)
-                {
-                    if (item.IsExist && IsCollsion(item)) Hit(item);
-                }
-            }
-            Utility.Log("子弹Draw");
+            
             base.Draw(g);
         }
 
@@ -55,11 +38,32 @@ namespace TankBattle
             base.Pause();
         }
 
+        public override void CheckPosition()
+        {
+            if (OutRange())
+            {
+                Hit(null);
+            }
+            else
+            {
+                foreach (GameObj item in this.Game.Walls)
+                {
+                    if (IsCollsion(item)) Hit(item);
+                }
+            }
+        }
+
         private bool OutRange()
         {
             return Position.X <= 0 || Position.X + Size.Width >= Range.X ||
                 Position.Y <= 0 || Position.Y + Size.Height >= Range.Y;
         }
-        
+
+        private void Hit(GameObj obj)
+        {
+            IsExist = false;
+            if (obj != null) obj.IsExist = false;
+        }
+
     }
 }

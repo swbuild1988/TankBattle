@@ -39,9 +39,7 @@ namespace TankBattle
                 
         public override void Draw(Graphics g)
         {
-            Utility.Log("画坦克");
             base.Draw(g);
-            Utility.Log("画子弹");
             if (bullet.IsExist) bullet.Draw(g);
         }
         
@@ -49,6 +47,35 @@ namespace TankBattle
         {
             base.Pause();
             bullet.Pause();
+        }
+
+        public override void CheckPosition()
+        {
+            foreach (GameObj item in this.Game.Walls)
+            {
+                if (IsCollsion(item))
+                {
+                    Point tmp = Position;
+                    switch (Dir)
+                    {
+                        case Direct.UP:
+                            tmp.Y = item.Position.Y + item.Size.Height + 1;
+                            break;
+                        case Direct.RIGHT:
+                            tmp.X = item.Position.X - Size.Width - 1;
+                            break;
+                        case Direct.DOWN:
+                            tmp.Y = item.Position.Y - Size.Height - 1;
+                            break;
+                        case Direct.LEFT:
+                            tmp.X = item.Position.X + item.Size.Width + 1;
+                            break;
+                        default:
+                            break;
+                    }
+                    Position = tmp;
+                }
+            }
         }
     }
 }

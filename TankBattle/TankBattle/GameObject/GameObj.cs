@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace TankBattle
 {
@@ -161,19 +162,20 @@ namespace TankBattle
                 rotate((RotateFlipType)dir);
                 _dir = dir;
             }
+            
+            _position.X += _speed * GetDirectX();
+            _position.Y += _speed * GetDirectY();
+            _position.X = getValueInRange(_position.X, 0, _range.X - _size.Width);
+            _position.Y = getValueInRange(_position.Y, 0, _range.Y - _size.Height);
 
-            int _direct_x = GetDirectX();
-            int _direct_y = GetDirectY();
-            _position.X += _speed * _direct_x;
-            _position.Y += _speed * _direct_y;
-            if (_position.X < 0) _position.X = 0;
-            if (_position.X + _size.Width > _range.X) _position.X = _range.X - _size.Width;
-            if (_position.Y < 0) _position.Y = 0;
-            if (_position.Y + _size.Height > _range.Y) _position.Y = _range.Y - _size.Height;
+            CheckPosition();
         }
 
         public bool IsCollsion(GameObj obj)
         {
+            // 如果对象都不存在了，就不会碰撞了
+            if (!obj.IsExist) return false;
+
             if (this.Position.X >= obj.Position.X && this.Position.X >= obj.Position.X + obj.Size.Width)
             {
                 return false;
@@ -203,9 +205,16 @@ namespace TankBattle
             _image.RotateFlip(type);
         }
 
+        private int getValueInRange(int value, int min, int max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+
         #endregion
 
-        #region 虚方法，待重写
+        #region 虚方法,可重写
 
         public virtual void Draw(Graphics g)
         {
@@ -215,6 +224,11 @@ namespace TankBattle
         public virtual void Pause()
         {
             _isPause = !_isPause;
+        }
+
+        public virtual void CheckPosition()
+        {
+
         }
 
         #endregion
