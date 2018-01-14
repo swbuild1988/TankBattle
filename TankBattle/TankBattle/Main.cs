@@ -33,19 +33,19 @@ namespace TankBattle
         {
             TankGame game = new TankGame(fps, panel1, this, new Point(panel1.Width, panel1.Height));
 
-            game.registerActions("a", () => game.Tank.MoveLeft());
-            game.registerActions("d", () => game.Tank.MoveRight());
-            game.registerActions("w", () => game.Tank.MoveUp());
-            game.registerActions("s", () => game.Tank.MoveDown());
-            game.registerActions("left", () => game.Tank.MoveLeft());
-            game.registerActions("right", () => game.Tank.MoveRight());
-            game.registerActions("up", () => game.Tank.MoveUp());
-            game.registerActions("down", () => game.Tank.MoveDown());
-            game.registerActions("space", () => game.Tank.Fire());
-            game.registerActions("numpad0", () => game.Tank.Fire());
+            game.RegisterActions("a", () => game.Tank.MoveLeft());
+            game.RegisterActions("d", () => game.Tank.MoveRight());
+            game.RegisterActions("w", () => game.Tank.MoveUp());
+            game.RegisterActions("s", () => game.Tank.MoveDown());
+            game.RegisterActions("left", () => game.Tank.MoveLeft());
+            game.RegisterActions("right", () => game.Tank.MoveRight());
+            game.RegisterActions("up", () => game.Tank.MoveUp());
+            game.RegisterActions("down", () => game.Tank.MoveDown());
+            game.RegisterActions("space", () => game.Tank.Fire());
+            game.RegisterActions("numpad0", () => game.Tank.Fire());
             this.KeyDown += (object sender, KeyEventArgs e) =>
             {
-                if (e.KeyCode == Keys.P) game.Tank.Pause();
+                if (e.KeyCode == Keys.P) game.Pause();
             };
         }
     }

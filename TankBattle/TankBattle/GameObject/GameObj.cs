@@ -38,7 +38,7 @@ namespace TankBattle
             _size = size;
             _speed = speed;
             _isExist = isExist;
-            _ori_image = Utility.resizeImage(img, size);
+            _ori_image = Utility.ResizeImage(img, size);
             _image = _ori_image.Clone() as Image;
             
             this.Range = game.Range;
@@ -90,6 +90,14 @@ namespace TankBattle
             }
         }
 
+        public bool IsPause
+        {
+            get
+            {
+                return _isPause;
+            }
+        }
+
         public Point Range
         {
             set
@@ -134,11 +142,6 @@ namespace TankBattle
             Move(Direct.DOWN);
         }
 
-        public void Pause()
-        {
-            _isPause = !_isPause;
-        }
-
         public int GetDirectX()
         {
             return (int)_dir % 2 == 1 ? -1 * (int)_dir + 2 : 0;
@@ -169,7 +172,7 @@ namespace TankBattle
             if (_position.Y + _size.Height > _range.Y) _position.Y = _range.Y - _size.Height;
         }
 
-        public bool isCollsion(GameObj obj)
+        public bool IsCollsion(GameObj obj)
         {
             if (this.Position.X >= obj.Position.X && this.Position.X >= obj.Position.X + obj.Size.Width)
             {
@@ -207,6 +210,11 @@ namespace TankBattle
         public virtual void Draw(Graphics g)
         {
             if (_isExist) g.DrawImage(_image, _position);
+        }
+
+        public virtual void Pause()
+        {
+            _isPause = !_isPause;
         }
 
         #endregion

@@ -25,13 +25,13 @@ namespace TankBattle
         {
             Utility.Log(string.Format("开火，子弹状态{0}", bullet.IsExist));
 
-            if (!bullet.IsExist)
+            if (!bullet.IsExist && !bullet.IsPause)
             {
                 Point tmp = new Point();
                 int _direct_x = GetDirectX();
                 int _direct_y = GetDirectY();
-                tmp.X = Position.X + Size.Width / 2 + Size.Width / 2 * _direct_x;
-                tmp.Y = Position.Y + Size.Height / 2 + Size.Height / 2 * _direct_y;
+                tmp.X = Position.X + Size.Width / 2  + Size.Width / 2 * _direct_x;
+                tmp.Y = Position.Y + Size.Height / 2  + Size.Height / 2 * _direct_y;
                 
                 bullet.Shoot(Dir, tmp);
             }
@@ -45,7 +45,7 @@ namespace TankBattle
             if (bullet.IsExist) bullet.Draw(g);
         }
         
-        public new void Pause()
+        public override void Pause()
         {
             base.Pause();
             bullet.Pause();

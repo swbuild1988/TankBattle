@@ -32,14 +32,19 @@ namespace TankBattle
             init();
         }
 
-        public void setFPS(int fps)
+        public void SetFPS(int fps)
         {
             this._fps = fps;
         }
 
-        public void registerActions(string key, Action action)
+        public void RegisterActions(string key, Action action)
         {
             setHashTableValue(_actions, key, action);
+        }
+
+        public void Pause()
+        {
+            foreach (GameObj item in _elements) item.Pause();
         }
 
 

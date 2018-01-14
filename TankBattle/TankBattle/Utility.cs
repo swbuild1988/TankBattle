@@ -6,7 +6,7 @@ namespace TankBattle
 {
     class Utility
     {
-        public static Image resizeImage(Image imgToResize, Size size)
+        public static Image ResizeImage(Image imgToResize, Size size)
         {
             //获取图片宽度
             int sourceWidth = imgToResize.Width;

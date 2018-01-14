@@ -43,13 +43,18 @@ namespace TankBattle
             {
                 foreach (GameObj item in this.Game.Walls)
                 {
-                    if (item.IsExist && isCollsion(item)) Hit(item);
+                    if (item.IsExist && IsCollsion(item)) Hit(item);
                 }
             }
             Utility.Log("子弹Draw");
             base.Draw(g);
         }
-        
+
+        public override void Pause()
+        {
+            base.Pause();
+        }
+
         private bool OutRange()
         {
             return Position.X <= 0 || Position.X + Size.Width >= Range.X ||
