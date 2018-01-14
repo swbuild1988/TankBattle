@@ -26,20 +26,31 @@ namespace TankBattle
             this.Dir = dir;
         }
 
-        public void Hit()
+        public void Hit(GameObj obj)
         {
             IsExist = false;
+            if (obj != null) obj.IsExist = false;
         }
 
         public override void Draw(Graphics g)
         {
             Move(Dir);
-            if (OutRange()) Hit();
-
+            if (OutRange())
+            {
+                Hit(null);
+            }
+            else
+            {
+                foreach (GameObj item in this.Game.Walls)
+                {
+                    if (item.IsExist && isCollsion(item)) Hit(item);
+                }
+            }
+            Utility.Log("子弹Draw");
             base.Draw(g);
         }
         
-        public bool OutRange()
+        private bool OutRange()
         {
             return Position.X <= 0 || Position.X + Size.Width >= Range.X ||
                 Position.Y <= 0 || Position.Y + Size.Height >= Range.Y;

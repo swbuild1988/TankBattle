@@ -149,7 +149,7 @@ namespace TankBattle
             return (int)_dir % 2 == 0 ? (int)_dir - 1 : 0;
         }
 
-        public  void Move(Direct dir)
+        public void Move(Direct dir)
         {
             if (_isPause) return;
 
@@ -167,6 +167,27 @@ namespace TankBattle
             if (_position.X + _size.Width > _range.X) _position.X = _range.X - _size.Width;
             if (_position.Y < 0) _position.Y = 0;
             if (_position.Y + _size.Height > _range.Y) _position.Y = _range.Y - _size.Height;
+        }
+
+        public bool isCollsion(GameObj obj)
+        {
+            if (this.Position.X >= obj.Position.X && this.Position.X >= obj.Position.X + obj.Size.Width)
+            {
+                return false;
+            }
+            else if (this.Position.X <= obj.Position.X && this.Position.X + this.Size.Width <= obj.Position.X)
+            {
+                return false;
+            }
+            else if (this.Position.Y >= obj.Position.Y && this.Position.Y >= obj.Position.Y + obj.Size.Height)
+            {
+                return false;
+            }
+            else if (this.Position.Y <= obj.Position.Y && this.Position.Y + this.Size.Height <= obj.Position.Y)
+            {
+                return false;
+            }
+            return true;
         }
 
         #endregion

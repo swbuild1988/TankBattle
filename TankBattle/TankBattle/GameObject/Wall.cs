@@ -17,7 +17,7 @@ namespace TankBattle
             : base(game, Resources.walls, new Size(30, 30), position)
         {
         }
-        
+
         public override void Draw(Graphics g)
         {
             base.Draw(g);

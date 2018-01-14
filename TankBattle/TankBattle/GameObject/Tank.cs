@@ -24,6 +24,7 @@ namespace TankBattle
         public void Fire()
         {
             Utility.Log(string.Format("开火，子弹状态{0}", bullet.IsExist));
+
             if (!bullet.IsExist)
             {
                 Point tmp = new Point();
@@ -38,7 +39,9 @@ namespace TankBattle
                 
         public override void Draw(Graphics g)
         {
+            Utility.Log("画坦克");
             base.Draw(g);
+            Utility.Log("画子弹");
             if (bullet.IsExist) bullet.Draw(g);
         }
         

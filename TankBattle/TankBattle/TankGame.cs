@@ -53,8 +53,8 @@ namespace TankBattle
             }
             Tank = new Tank(this);
 
-            _elements.AddRange(Walls);
             _elements.Add(Tank);
+            _elements.AddRange(Walls);
 
             #region 初始化Timer，并设置为单次触发
             _refreshTimer.Interval = 1000.0 / _fps;
