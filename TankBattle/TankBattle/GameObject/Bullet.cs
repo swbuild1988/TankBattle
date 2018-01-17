@@ -10,7 +10,7 @@ namespace TankBattle
     /// </summary>
     class Bullet : GameObj
     {
-        private int _cooldownTime = 500;
+        private int _cooldownTime = 300;
         private bool _isCoolDown = true;
         private Timer cooldown_Timer = new Timer();
 

@@ -19,6 +19,18 @@ namespace TankBattle
         private Hashtable _actions = new Hashtable();
         private List<GameObj> _elements = new List<GameObj>();
 
+        public int FPS
+        {
+            get
+            {
+                return _fps;
+            }
+            set
+            {
+                _fps = value;
+            }
+        }
+
 
         public Tank Tank { get; set; }
         public List<Wall> Walls { get; set; }
@@ -34,7 +46,7 @@ namespace TankBattle
 
         public void SetFPS(int fps)
         {
-            this._fps = fps;
+            _fps = fps;
         }
 
         public void RegisterActions(string key, Action action)
@@ -46,8 +58,7 @@ namespace TankBattle
         {
             foreach (GameObj item in _elements) item.Pause();
         }
-
-
+        
         private void init()
         {
             Walls = new List<Wall>();
@@ -85,6 +96,7 @@ namespace TankBattle
 
         private void _window_KeyDown(object sender, KeyEventArgs e)
         {
+            Utility.Log(e.KeyCode.ToString().ToLower() + " 按下");
             setHashTableValue(_keyDowns, e.KeyCode.ToString().ToLower(), true);
         }
 
@@ -109,6 +121,7 @@ namespace TankBattle
             {
                 if (_keyDowns.ContainsKey(item.Key) && (bool)_keyDowns[item.Key])
                 {
+                    Utility.Log(item.Key.ToString() + " 按下");
                     Action ac = _actions[item.Key] as Action;
                     ac.Invoke();
                 }

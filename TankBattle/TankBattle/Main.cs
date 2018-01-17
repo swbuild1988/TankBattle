@@ -18,6 +18,7 @@ namespace TankBattle
         /// 帧数
         /// </summary>
         int fps = 30;
+        TankGame game;
 
         public Main()
         {
@@ -26,12 +27,17 @@ namespace TankBattle
             InitialGame();
         }
 
+        private void Main_Load(object sender, EventArgs e)
+        {
+            SetDebugMode(false);
+        }
+
         /// <summary>
         /// 初始化游戏
         /// </summary>
-        public void InitialGame()
+        private void InitialGame()
         {
-            TankGame game = new TankGame(fps, panel1, this, new Point(panel1.Width, panel1.Height));
+            game = new TankGame(fps, DrawPanel, this, new Point(DrawPanel.Width, DrawPanel.Height));
 
             game.RegisterActions("a", () => game.Tank.MoveLeft());
             game.RegisterActions("d", () => game.Tank.MoveRight());
@@ -47,6 +53,23 @@ namespace TankBattle
             {
                 if (e.KeyCode == Keys.P) game.Pause();
             };
+        }
+
+        private void SetDebugMode(bool debug_flag)
+        {
+            if (debug_flag)
+            {
+                this.ClientSize = new Size(DrawPanel.Width + DebugPanel.Width + 10, DrawPanel.Height);
+            }
+            else
+            {
+                this.ClientSize = DrawPanel.Size;
+            }
+        }
+
+        private void Bar_FPS_ValueChanged(object sender, EventArgs e)
+        {
+            game.SetFPS(Bar_FPS.Value);
         }
     }
 }
