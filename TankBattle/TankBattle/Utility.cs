@@ -44,4 +44,12 @@ namespace TankBattle
             Console.WriteLine(DateTime.Now.ToString() + ": " + msg);
         }
     }
+    
+    public enum Direct
+    {
+        UP = 0,
+        RIGHT = 1,
+        DOWN = 2,
+        LEFT = 3
+    }
 }

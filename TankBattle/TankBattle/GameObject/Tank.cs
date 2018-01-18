@@ -11,7 +11,7 @@ namespace TankBattle
     /// <summary>
     /// 坦克类
     /// </summary>
-    class Tank : GameObj
+    public class Tank : GameObj
     {
         private Bullet bullet;
 
@@ -51,7 +51,7 @@ namespace TankBattle
 
         public override void CheckPosition()
         {
-            foreach (GameObj item in this.Game.Walls)
+            foreach (BaseObj item in this.Game.Walls)
             {
                 if (IsCollsion(item))
                 {

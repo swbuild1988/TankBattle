@@ -11,10 +11,10 @@ namespace TankBattle
     /// <summary>
     /// 墙类
     /// </summary>
-    class Wall : GameObj
+    public class Wall : BaseObj
     {
-        public Wall(TankGame game, Point position)
-            : base(game, Resources.walls, new Size(30, 30), position)
+        public Wall(Point position)
+            : base(Resources.walls, new Size(30, 30), position)
         {
         }
     }

@@ -72,7 +72,7 @@ namespace TankBattle
             }
             else
             {
-                foreach (GameObj item in this.Game.Walls)
+                foreach (BaseObj item in this.Game.Walls)
                 {
                     if (IsCollsion(item)) Hit(item);
                 }
@@ -85,7 +85,7 @@ namespace TankBattle
                 Position.Y <= 0 || Position.Y + Size.Height >= Range.Y;
         }
 
-        private void Hit(GameObj obj)
+        private void Hit(BaseObj obj)
         {
             IsExist = false;
             if (obj != null) obj.IsExist = false;

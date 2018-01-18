@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace TankBattle
 {
-    class TankGame : IDisposable
+    public class TankGame : IDisposable
     {
         public Point Range { get; set; }
 
@@ -17,7 +17,7 @@ namespace TankBattle
         private Control _window;
         private Hashtable _keyDowns = new Hashtable();
         private Hashtable _actions = new Hashtable();
-        private List<GameObj> _elements = new List<GameObj>();
+        private List<BaseObj> _elements = new List<BaseObj>();
 
         public int FPS
         {
@@ -64,7 +64,7 @@ namespace TankBattle
             Walls = new List<Wall>();
             for (int i = 0; i < 6; i++)
             {
-                Wall w = new Wall(this, new Point(i * 60, i * 80));
+                Wall w = new Wall(new Point(i * 60, i * 80));
                 Walls.Add(w);
             }
             Tank = new Tank(this);
@@ -112,7 +112,7 @@ namespace TankBattle
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
-            foreach (GameObj item in _elements) item.Draw(e.Graphics);
+            foreach (BaseObj item in _elements) item.Draw(e.Graphics);
         }
 
         private void _refreshTimer_Elapsed(object sender, ElapsedEventArgs e)
