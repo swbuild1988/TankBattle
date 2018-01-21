@@ -29,7 +29,7 @@ namespace TankBattle
 
         private void Main_Load(object sender, EventArgs e)
         {
-            SetDebugMode(false);
+            SetDebugMode(true);
         }
 
         /// <summary>
@@ -67,9 +67,11 @@ namespace TankBattle
             }
         }
 
-        private void Bar_FPS_ValueChanged(object sender, EventArgs e)
+        private void Bar_ValueChanged(object sender, EventArgs e)
         {
-            game.SetFPS(Bar_FPS.Value);
+            TrackBar bar = (TrackBar)sender;
+
+            game.SetFPS(bar.Value);
         }
     }
 }

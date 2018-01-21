@@ -6,7 +6,7 @@ namespace TankBattle
     /// <summary>
     /// 所有游戏中的能动的对象类
     /// </summary>
-    public abstract class GameObj : BaseObj, ITankAction
+    public abstract class GameTank : BaseObj, ITankAction
     {
         #region 私有参数
         
@@ -19,7 +19,7 @@ namespace TankBattle
 
         #endregion
 
-        public GameObj(TankGame game, Image img, Size size, Point position, int speed = 0, bool isExist = true)
+        public GameTank(TankGame game, Image img, Size size, Point position, int speed = 0, bool isExist = true)
             : base(img, size, position, isExist)
         {
             _game = game;

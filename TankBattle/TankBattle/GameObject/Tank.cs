@@ -11,7 +11,7 @@ namespace TankBattle
     /// <summary>
     /// 坦克类
     /// </summary>
-    public class Tank : GameObj
+    public class Tank : GameTank
     {
         private Bullet bullet;
 

@@ -56,7 +56,7 @@ namespace TankBattle
 
         public void Pause()
         {
-            foreach (GameObj item in _elements) item.Pause();
+            foreach (GameTank item in _elements) item.Pause();
         }
         
         private void init()

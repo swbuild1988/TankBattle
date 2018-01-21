@@ -74,7 +74,7 @@
             this.Bar_FPS.Size = new System.Drawing.Size(136, 45);
             this.Bar_FPS.TabIndex = 0;
             this.Bar_FPS.Value = 30;
-            this.Bar_FPS.ValueChanged += new System.EventHandler(this.Bar_FPS_ValueChanged);
+            this.Bar_FPS.ValueChanged += new System.EventHandler(this.Bar_ValueChanged);
             // 
             // Main
             // 

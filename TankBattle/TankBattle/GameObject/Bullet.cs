@@ -8,7 +8,7 @@ namespace TankBattle
     /// <summary>
     /// 子弹类
     /// </summary>
-    class Bullet : GameObj
+    class Bullet : GameTank
     {
         private int _cooldownTime = 300;
         private bool _isCoolDown = true;
