@@ -18,5 +18,12 @@ namespace TankBattle
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
         }
+
+        // ************************************************************ //
+        //                                                              //
+        //                     暂时告一段落                             //
+        //                      2018/01/23                              //
+        //                                                              //
+        // ************************************************************ //
     }
 }
